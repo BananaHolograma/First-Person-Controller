@@ -124,6 +124,7 @@ func free_look(delta: float = get_physics_process_delta_time()):
 			head.rotation.y = lerp(head.rotation.y, 0.0, delta * FREE_LOOKING_LERP_SPEED)
 			camera_3d.rotation.z = lerp(camera_3d.rotation.z, 0.0, delta * FREE_LOOKING_LERP_SPEED)
 
+
 func bobbing(delta: float = get_physics_process_delta_time()) -> void:
 	if BOB_ENABLED and is_on_floor():
 		var current_state = finite_state_machine.current_state as State

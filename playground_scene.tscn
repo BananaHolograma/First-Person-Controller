@@ -21,6 +21,7 @@ uv1_triplanar = true
 
 [node name="FirstPersonController" parent="." instance=ExtResource("2_30gpg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950654, 1.08766)
+collision_mask = 5
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -40,3 +41,8 @@ material = SubResource("StandardMaterial3D_2v24p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693051, 1.31311, -1.39702)
 size = Vector3(3.57549, 0.181006, 1.71848)
 material = SubResource("StandardMaterial3D_yrljs")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49179, 1.97496, 4.4323)
+use_collision = true
+size = Vector3(8.86805, 3.87477, 0.746879)

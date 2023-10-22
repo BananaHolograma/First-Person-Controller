@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b317ev4vnerlq"]
+[gd_scene load_steps=19 format=3 uid="uid://b317ev4vnerlq"]
 
 [ext_resource type="Script" path="res://first_person_controller/first_person_controller.gd" id="1_jjech"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/finite_state_machine.gd" id="2_ulv18"]
@@ -8,7 +8,8 @@
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/run.gd" id="5_jx43c"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crouch.gd" id="7_skljo"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crawl.gd" id="8_mxk70"]
-[ext_resource type="Script" path="res://first_person_controller/state_machine/states/Slide.gd" id="9_8yfye"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/slide.gd" id="9_1fvee"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/wall_run.gd" id="10_m2dyl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bnnbn"]
 radius = 0.313218
@@ -139,7 +140,10 @@ script = ExtResource("7_skljo")
 script = ExtResource("8_mxk70")
 
 [node name="Slide" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("9_8yfye")
+script = ExtResource("9_1fvee")
+
+[node name="WallRun" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("10_m2dyl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

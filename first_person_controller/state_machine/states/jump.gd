@@ -11,13 +11,20 @@ class_name Jump extends Motion
 var jump_count := 1
 
 func _enter():
-	if not previous_states.is_empty() and previous_states.back() is Slide:
-		animation_player.play_backwards("crouch")
-	
+	if not previous_states.is_empty():
+		var last_state = previous_states.back()
+		
+		if last_state is Slide:
+			animation_player.play_backwards("crouch")
+		
+		if last_state is WallRun:
+			direction = params["wall_normal"]
+		
 	owner.velocity.y = jump_velocity
 
 func _exit():
 	jump_count = 1
+
 
 func physics_update(delta):
 	super.physics_update(delta)
@@ -37,8 +44,11 @@ func physics_update(delta):
 		
 	if Input.is_action_just_released("jump"):
 		shorten_jump()
-		
+	
 	owner.move_and_slide()
+	
+	detect_wall()
+		
 
 
 func shorten_jump():
@@ -48,3 +58,12 @@ func shorten_jump():
 		owner.velocity.y = new_jump_velocity
 
 
+func detect_wall():
+	if owner.is_on_wall():
+		var collision = owner.get_slide_collision(0)
+		var normal = collision.get_normal()
+		var wall_direction = Vector3.UP.cross(normal)
+		
+		if Input.is_action_pressed("run"):
+			state_finished.emit("WallRun", {"wall_direction": wall_direction, "wall_normal": collision.get_normal()})
+	

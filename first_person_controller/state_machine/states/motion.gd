@@ -14,10 +14,11 @@ var direction := Vector3.ZERO
 func physics_update(delta: float):
 	direction = get_input_direction()["direction"]
 	
-	if not owner.is_on_floor():
+	if not owner.is_on_floor() and not finite_state_machine.current_state_name_is("WallRun"):
 		owner.velocity.y -= gravity * delta
 		owner.velocity.y = clamp(owner.velocity.y, -fall_velocity_limit, fall_velocity_limit)
-	
+		
+
 
 func move(speed: float, delta: float = get_physics_process_delta_time()):
 	if direction:
@@ -28,7 +29,7 @@ func move(speed: float, delta: float = get_physics_process_delta_time()):
 		owner.velocity.x = lerp(owner.velocity.x, direction.x * speed, delta * friction)
 		owner.velocity.z = lerp(owner.velocity.z, direction.z * speed, delta * friction)
 		
-		
+	
 func detect_jump():
 	if Input.is_action_just_pressed("jump") and owner.is_on_floor():
 		state_finished.emit("Jump", {})
@@ -37,7 +38,7 @@ func detect_crouch():
 	if Input.is_action_pressed("crouch") and owner.is_on_floor():
 		state_finished.emit("Crouch", {})
 
-	
+
 func get_input_direction() -> Dictionary:
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
