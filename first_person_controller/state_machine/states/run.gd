@@ -10,6 +10,14 @@ func _ready():
 	_create_speed_timer()
 
 
+func _enter():
+	speed_timer.start()
+
+
+func _exit():
+	speed_timer.stop()
+
+
 func physics_update(delta):
 	super.physics_update(delta)
 	
@@ -40,4 +48,4 @@ func _create_speed_timer() -> void:
 		
 	
 func on_speed_timeout():
-	pass
+	state_finished.emit("Walk", {"catching_breath": true})
