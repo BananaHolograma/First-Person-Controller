@@ -3,6 +3,7 @@ class_name Motion extends State
 @onready var finite_state_machine = get_parent()  as FiniteStateMachine
 @onready var animation_player = owner.get_node("AnimationPlayer")
 @onready var ceil_shape_cast: ShapeCast3D = owner.get_node("CeilShapeCast3D")
+@onready var neck: Node3D = owner.get_node("%Neck")
 @onready var ceil_
 @export var gravity: float =  ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var friction: float = 7.0

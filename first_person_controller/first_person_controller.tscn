@@ -113,6 +113,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="Neck/Head/Eyes"]
+unique_name_in_owner = true
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_ulv18")
