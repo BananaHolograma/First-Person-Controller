@@ -1,17 +1,14 @@
 class_name Crouch extends Motion
 
 @export var speed := 1.0
-@onready var ceil_shape_cast: ShapeCast3D = owner.get_node("CeilShapeCast3D")
 
 func _enter() -> void:
-	if animation_player:
-		if previous_states.is_empty() or not previous_states.back() is Crawl:
-			animation_player.play("crouch")
-	
+	if previous_states.is_empty() or not previous_states.back().name in ["Crawl", "Slide"]:
+		animation_player.play("crouch")
+
 	
 func _exit() -> void:
-	if animation_player:
-		animation_player.play_backwards("crouch")
+	animation_player.play_backwards("crouch")
 		
 
 func physics_update(delta):

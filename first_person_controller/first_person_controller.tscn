@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b317ev4vnerlq"]
+[gd_scene load_steps=18 format=3 uid="uid://b317ev4vnerlq"]
 
 [ext_resource type="Script" path="res://first_person_controller/first_person_controller.gd" id="1_jjech"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/finite_state_machine.gd" id="2_ulv18"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/run.gd" id="5_jx43c"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crouch.gd" id="7_skljo"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crawl.gd" id="8_mxk70"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/Slide.gd" id="9_8yfye"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bnnbn"]
 radius = 0.313218
@@ -97,7 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5274, 0)
 shape = SubResource("CapsuleShape3D_qfu3q")
 
 [node name="CeilShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60168, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.456799, 0)
 shape = SubResource("CapsuleShape3D_rm6ri")
 target_position = Vector3(0, 0, 0)
 
@@ -134,6 +135,9 @@ script = ExtResource("7_skljo")
 
 [node name="Crawl" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("8_mxk70")
+
+[node name="Slide" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_8yfye")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

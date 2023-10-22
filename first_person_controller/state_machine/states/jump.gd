@@ -8,7 +8,11 @@ class_name Jump extends Motion
 @export var lerp_smoothness := 3.0
 
 func _enter():
+	if not previous_states.is_empty() and previous_states.back() is Slide:
+		animation_player.play_backwards("crouch")
+		
 	owner.velocity.y = jump_velocity
+
 
 func physics_update(delta):
 	super.physics_update(delta)

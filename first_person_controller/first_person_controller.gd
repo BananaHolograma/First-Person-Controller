@@ -78,7 +78,7 @@ func _physics_process(delta):
 
 func adjust_collision_shapes() -> void:
 	match(finite_state_machine.current_state.name):
-		"Crouch":
+		"Crouch", "Slide":
 			standing_collision_shape_3d.disabled = true
 			crouch_collision_shape_3d.disabled = false
 			crawl_collision_shape_3d.disabled = true
@@ -116,7 +116,7 @@ func rotate_camera_smoothly(event: InputEvent):
 
 func free_look(delta: float = get_physics_process_delta_time()):
 	if FREE_LOOK_ENABLED:
-		if Input.is_action_pressed("free_look"):
+		if Input.is_action_pressed("free_look") or finite_state_machine.current_state_name_is("Slide"):
 			IS_FREE_LOOKING = true
 			camera_3d.rotation.z = deg_to_rad(head.rotation.y * FREE_LOOK_TILT)
 		else:

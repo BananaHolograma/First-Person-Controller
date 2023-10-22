@@ -1,7 +1,6 @@
 class_name Crawl extends Motion
 
 @export var speed := 0.8
-@onready var ceil_shape_cast: ShapeCast3D = owner.get_node("CeilShapeCast3D")
 
 func _enter() -> void:
 	if animation_player:
