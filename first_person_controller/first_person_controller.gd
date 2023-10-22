@@ -44,7 +44,7 @@ class_name Player extends CharacterBody3D
 @export var SWING_HEAD_RECOVERY_LERP := 0.15
 
 @export_group("Camera FOV")
-@export var camera_fov_range = [2, 75, 85]
+@export var camera_fov_range = [2, 75, 85, 8.0]
 
 
 var IS_FREE_LOOKING := false
@@ -61,6 +61,7 @@ func _input(event: InputEvent):
 func _physics_process(delta):
 	free_look(delta)
 	bobbing(delta)
+	camera_fov(delta)
 	
 ## Rotate the neck of the CharacterBody3D
 # to achieve a realistic head movement on the first person controller.
@@ -134,6 +135,13 @@ func bobbing(delta: float = get_physics_process_delta_time()) -> void:
 			eyes.position.move_toward(Vector3.ZERO, delta * BOB_LERP_SPEED)
 
 
+func camera_fov(delta: float = get_physics_process_delta_time()) -> void:
+	if finite_state_machine.current_state_name_is("Run"):
+		camera_3d.fov = lerp(camera_3d.fov, float(camera_fov_range[2]), delta * camera_fov_range[3])
+	else:
+		camera_3d.fov = lerp(camera_3d.fov, float(camera_fov_range[1]), delta * camera_fov_range[3])
+	
+	
 func _switch_mouse_mode() -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

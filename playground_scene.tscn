@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://5qk661u67pbp"]
+
+[ext_resource type="Texture2D" uid="uid://36c0llyr3w8h" path="res://assets/prototyping/Dark/texture_01.png" id="1_huq0g"]
+[ext_resource type="Texture2D" uid="uid://cpxjbxcj57k16" path="res://assets/prototyping/Purple/texture_03.png" id="2_8vqjc"]
+[ext_resource type="PackedScene" uid="uid://b317ev4vnerlq" path="res://first_person_controller/first_person_controller.tscn" id="2_30gpg"]
+[ext_resource type="Texture2D" uid="uid://077ox8jkck2" path="res://assets/prototyping/Purple/texture_04.png" id="3_v1gxn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jx3dq"]
+albedo_texture = ExtResource("1_huq0g")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v24p"]
+albedo_texture = ExtResource("2_8vqjc")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrljs"]
+albedo_texture = ExtResource("3_v1gxn")
+uv1_triplanar = true
+
+[node name="PlaygroundScene" type="Node3D"]
+
+[node name="FirstPersonController" parent="." instance=ExtResource("2_30gpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982292, 1.08766)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.739472)
+use_collision = true
+size = Vector3(13.4909, 0.002, 10.6887)
+material = SubResource("StandardMaterial3D_jx3dq")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45406, 0.785558, -1.39702)
+size = Vector3(1.15239, 0.181006, 1.71848)
+material = SubResource("StandardMaterial3D_2v24p")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693051, 1.20072, -1.39702)
+size = Vector3(3.57549, 0.181006, 1.71848)
+material = SubResource("StandardMaterial3D_yrljs")
