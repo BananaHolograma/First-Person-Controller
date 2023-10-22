@@ -114,7 +114,9 @@ This Godot project come with a premade input map, feel free to change it as your
 
 ## Crouch
 <kbd>Ctrl</kbd> - Crouch
-<kbd>Ctrl</kbd> + <kbd>Shift</kbd> - Crawl
+<kbd>Shift</kbd> - *(while crouching)* Crawl
+
+if a ceiling collision is detected, it is not necessary to hold down the key to remain in this state.
 
 ## Jump
 <kbd>Space</kbd>
