@@ -11,7 +11,7 @@ class_name Player extends CharacterBody3D
 ## MOUSE AND CAMERA SENSITIVITY
 @export_group("Sensitivity")
 ## The global sensitivity with the mouse that is applied in the entire game camera movement
-@export var MOUSE_SENSITIVITY = GlobalSettings.mouse_sensitivity
+@export var MOUSE_SENSITIVITY = GlobalSettings.MOUSE_SENSITIVITY
 ## The camera sensitivity to balance the smoothness of the rotation
 @export_range(0, 1, 0.01) var CAMERA_SENSITIVITY := 0.3
 
