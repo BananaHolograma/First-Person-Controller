@@ -38,8 +38,9 @@ func physics_update(delta):
 	
 	if slide_tilt > 0:
 		neck.rotation.z = lerp(neck.rotation.z, slide_side * deg_to_rad(slide_tilt), delta * 8.0)
-		
-	detect_jump()
+	
+	if not ceil_shape_cast.is_colliding():
+		detect_jump()
 	
 	owner.move_and_slide()
 

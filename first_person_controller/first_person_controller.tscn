@@ -130,6 +130,7 @@ script = ExtResource("5_jx43c")
 
 [node name="Jump" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_giftp")
+jump_times = 2
 
 [node name="Crouch" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("7_skljo")
