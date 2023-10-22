@@ -1,7 +1,8 @@
 class_name Motion extends State
 
 @onready var finite_state_machine = get_parent()  as FiniteStateMachine
-
+@onready var animation_player = owner.get_node("AnimationPlayer")
+@onready var ceil_
 @export var gravity: float =  ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var friction: float = 7.0
 
@@ -27,7 +28,11 @@ func move(speed: float, delta: float = get_physics_process_delta_time()):
 func detect_jump():
 	if Input.is_action_just_pressed("jump") and owner.is_on_floor():
 		state_finished.emit("Jump", {})
-	
+
+func detect_crouch():
+	if Input.is_action_pressed("crouch") and owner.is_on_floor():
+		state_finished.emit("Crouch", {})
+
 	
 func get_input_direction() -> Dictionary:
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

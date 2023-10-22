@@ -5,6 +5,9 @@ class_name Player extends CharacterBody3D
 @onready var eyes: Node3D = %Eyes
 @onready var camera_3d: Camera3D = $Neck/Head/Eyes/Camera3D
 @onready var finite_state_machine = $FiniteStateMachine as FiniteStateMachine
+@onready var standing_collision_shape_3d: CollisionShape3D = $StandingCollisionShape3D
+@onready var crouch_collision_shape_3d: CollisionShape3D = $CrouchCollisionShape3D
+@onready var crawl_collision_shape_3d: CollisionShape3D = $CrawlCollisionShape3D
 
 ## MOUSE AND CAMERA SENSITIVITY
 @export_group("Sensitivity")
@@ -34,6 +37,10 @@ class_name Player extends CharacterBody3D
 @export var BOB_LERP_SPEED := 10.0
 @export var BOB_SPEED = 7.5
 @export var BOB_INTENSITY = 0.1
+@export var BOB_SPEED_RUN = 10.0
+@export var BOB_INTENSITY_RUN = 0.15
+@export var BOB_SPEED_CROUCH = 6.0
+@export var BOB_INTENSITY_CROUCH = 0.05
 
 @export_group("Swing head")
 ## Enable the swing head when move on horizontal axis (right & left)
@@ -52,6 +59,10 @@ var LOCKED := false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	standing_collision_shape_3d.disabled = false
+	crouch_collision_shape_3d.disabled = true
+	crawl_collision_shape_3d.disabled = true
 
 
 func _input(event: InputEvent):
@@ -62,6 +73,24 @@ func _physics_process(delta):
 	free_look(delta)
 	bobbing(delta)
 	camera_fov(delta)
+	adjust_collision_shapes()
+	
+
+func adjust_collision_shapes() -> void:
+	match(finite_state_machine.current_state.name):
+		"Crouch":
+			standing_collision_shape_3d.disabled = true
+			crouch_collision_shape_3d.disabled = false
+			crawl_collision_shape_3d.disabled = true
+		"Crawl":
+			standing_collision_shape_3d.disabled = true
+			crouch_collision_shape_3d.disabled = true
+			crawl_collision_shape_3d.disabled = false
+		_:
+			standing_collision_shape_3d.disabled = false
+			crouch_collision_shape_3d.disabled = true
+			crawl_collision_shape_3d.disabled = true
+
 	
 ## Rotate the neck of the CharacterBody3D
 # to achieve a realistic head movement on the first person controller.
@@ -110,12 +139,12 @@ func bobbing(delta: float = get_physics_process_delta_time()) -> void:
 				"Walk":
 					head_bobbing_active = true
 				"Run":
-					head_bobbing_speed = 10.0
-					head_bobbing_intensity = 0.15
+					head_bobbing_speed = BOB_SPEED_RUN
+					head_bobbing_intensity = BOB_INTENSITY_RUN
 					head_bobbing_active = true
-				"Crouch":
-					head_bobbing_speed = 6.0
-					head_bobbing_intensity = 0.05
+				"Crouch", "Crawl":
+					head_bobbing_speed = BOB_SPEED_CROUCH
+					head_bobbing_intensity = BOB_INTENSITY_CROUCH
 					head_bobbing_active = true
 				_:
 					head_bobbing_active = false

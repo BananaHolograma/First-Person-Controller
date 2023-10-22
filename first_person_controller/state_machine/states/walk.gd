@@ -15,6 +15,7 @@ func physics_update(delta):
 		state_finished.emit("Run", {})
 		
 	detect_jump()
+	detect_crouch()
 	
 	owner.move_and_slide()
 	

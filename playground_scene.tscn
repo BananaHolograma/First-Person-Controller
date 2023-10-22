@@ -20,7 +20,7 @@ uv1_triplanar = true
 [node name="PlaygroundScene" type="Node3D"]
 
 [node name="FirstPersonController" parent="." instance=ExtResource("2_30gpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982292, 1.08766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950654, 1.08766)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -32,11 +32,11 @@ size = Vector3(13.4909, 0.002, 10.6887)
 material = SubResource("StandardMaterial3D_jx3dq")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45406, 0.785558, -1.39702)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45406, 0.891182, -1.39702)
 size = Vector3(1.15239, 0.181006, 1.71848)
 material = SubResource("StandardMaterial3D_2v24p")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693051, 1.20072, -1.39702)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693051, 1.31311, -1.39702)
 size = Vector3(3.57549, 0.181006, 1.71848)
 material = SubResource("StandardMaterial3D_yrljs")
