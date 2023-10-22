@@ -4,8 +4,6 @@ class_name Player extends CharacterBody3D
 @onready var head: Node3D = %Head
 @onready var eyes: Node3D = %Eyes
 @onready var camera_3d: Camera3D = $Neck/Head/Eyes/Camera3D
-
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var finite_state_machine = $FiniteStateMachine as FiniteStateMachine
 
 ## MOUSE AND CAMERA SENSITIVITY
@@ -28,21 +26,41 @@ class_name Player extends CharacterBody3D
 ## The maximum neck rotation when the character is free looking
 @export var FREE_LOOK_MAXIMUM_ROTATION := 120
 
+@export_group("Head bobbing")
+## Enable head bobbing for this FPS
+@export var BOB_ENABLED := true
+@export var BOB_VECTOR := Vector2.ZERO
+@export var BOB_INDEX := 0.0
+@export var BOB_LERP_SPEED := 10.0
+@export var BOB_SPEED = 7.5
+@export var BOB_INTENSITY = 0.1
+
+@export_group("Swing head")
+## Enable the swing head when move on horizontal axis (right & left)
+@export var SWING_HEAD_ENABLED := false
+## The rotation swing to apply in degrees
+@export var SWING_HEAD_ROTATION := 5
+@export var SWING_HEAD_ROTATION_LERP := 0.05
+@export var SWING_HEAD_RECOVERY_LERP := 0.15
+
+@export_group("Camera FOV")
+@export var camera_fov_range = [2, 75, 85]
+
 
 var IS_FREE_LOOKING := false
 var LOCKED := false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	animation_player.play("idle")
 
 
 func _input(event: InputEvent):
 	rotate_camera_smoothly(event)
+	_switch_mouse_mode()
 	
 func _physics_process(delta):
 	free_look(delta)
+	bobbing(delta)
 	
 ## Rotate the neck of the CharacterBody3D
 # to achieve a realistic head movement on the first person controller.
@@ -75,6 +93,45 @@ func free_look(delta: float = get_physics_process_delta_time()):
 			IS_FREE_LOOKING = false
 			head.rotation.y = lerp(head.rotation.y, 0.0, delta * FREE_LOOKING_LERP_SPEED)
 			camera_3d.rotation.z = lerp(camera_3d.rotation.z, 0.0, delta * FREE_LOOKING_LERP_SPEED)
+
+func bobbing(delta: float = get_physics_process_delta_time()) -> void:
+	if BOB_ENABLED and is_on_floor():
+		var current_state = finite_state_machine.current_state as State
+		
+		if not current_state.direction.is_zero_approx():
+			## Default values for head bob
+			var head_bobbing_speed = BOB_SPEED
+			var head_bobbing_intensity = BOB_INTENSITY
+			var head_bobbing_active := false
+			
+			## Activate head bobbing only on few states
+			match(current_state.name):
+				"Walk":
+					head_bobbing_active = true
+				"Run":
+					head_bobbing_speed = 10.0
+					head_bobbing_intensity = 0.15
+					head_bobbing_active = true
+				"Crouch":
+					head_bobbing_speed = 6.0
+					head_bobbing_intensity = 0.05
+					head_bobbing_active = true
+				_:
+					head_bobbing_active = false
+			
+			if head_bobbing_active:
+				BOB_INDEX += head_bobbing_speed * delta
+			
+				BOB_VECTOR.y = sin(BOB_INDEX)
+				BOB_VECTOR.x = sin(BOB_INDEX / 2) * 0.5
+
+				eyes.position = eyes.position.move_toward(Vector3(
+					BOB_VECTOR.x * head_bobbing_intensity,
+					BOB_VECTOR.y * (head_bobbing_intensity / 2.0),
+					eyes.position.z
+				), delta * BOB_LERP_SPEED)
+		else:
+			eyes.position.move_toward(Vector3.ZERO, delta * BOB_LERP_SPEED)
 
 
 func _switch_mouse_mode() -> void:

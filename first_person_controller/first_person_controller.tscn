@@ -3,48 +3,13 @@
 [ext_resource type="Script" path="res://first_person_controller/first_person_controller.gd" id="1_jjech"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/finite_state_machine.gd" id="2_ulv18"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/idle.gd" id="3_ebmny"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/walk.gd" id="4_4qxtv"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/jump.gd" id="5_giftp"]
+[ext_resource type="Script" path="res://first_person_controller/state_machine/states/run.gd" id="5_jx43c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bnnbn"]
-radius = 0.402654
+radius = 0.313218
 height = 1.8
-
-[sub_resource type="Animation" id="Animation_f82vp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Neck/Head/Eyes/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qnq4l"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Neck/Head/Eyes/Camera3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.045, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2poq2"]
-_data = {
-"RESET": SubResource("Animation_f82vp"),
-"idle": SubResource("Animation_qnq4l")
-}
 
 [node name="FirstPersonController" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895294, 0)
@@ -65,15 +30,18 @@ unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="Neck/Head/Eyes"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_2poq2")
-}
-
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_ulv18")
 current_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("3_ebmny")
-gravity = 9.8
+
+[node name="Walk" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_4qxtv")
+
+[node name="Run" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_jx43c")
+
+[node name="Jump" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_giftp")

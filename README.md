@@ -6,7 +6,6 @@
 [![Stars](https://img.shields.io/github/stars/godotparadise/First-Person-Controller)](https://github.com/GodotParadise/First-Person-Controller/stargazers)
 [![Total downloads](https://img.shields.io/github/downloads/GodotParadise/First-Person-Controller/total.svg?label=Downloads&logo=github&cacheSeconds=600)](https://github.com/GodotParadise/First-Person-Controller/releases)
 [![License](https://img.shields.io/github/license/GodotParadise/First-Person-Controller?cacheSeconds=2592000)](https://github.com/GodotParadise/First-Person-Controller/blob/main/LICENSE.md)
-[![Wiki](https://img.shields.io/badge/Read-wiki-cc5490.svg?logo=github)](https://github.com/GodotParadise/First-Person-Controller/wiki)
 </p>
 
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/GodotParadise/First-Person-Controller/blob/main/locale/README.es-ES.md)
@@ -18,13 +17,15 @@ A ready to go First person controller highly customizable.
 - [Requirements](#requirements)
 - [✨Installation](#installation)
 - [Global Settings](#global-settings)
+- [Exported parameters](#exported-parameters)
+- [Accessible normal variables](#accessible-normal-variables)
 - [Inputs](#inputs)
   - [Camera](#camera)
   - [Movement](#movement)
   - [Sprint](#sprint)
   - [Crouch](#crouch)
+  - [Jump](#jump)
   - [Free look](#free-look)
-- [Exported parameters](#exported-parameters)
 - [You are welcome to](#you-are-welcome-to)
 - [Contribution guidelines](#contribution-guidelines)
 - [Contact us](#contact-us)
@@ -47,6 +48,57 @@ An autoload class is provided to manage the settings that could be useful to mak
 @export var MOTION_BLUR := true
 @export var SWING_HEAD := false
 ```
+# Exported parameters
+```py
+## MOUSE AND CAMERA SENSITIVITY
+@export_group("Sensitivity")
+## The global sensitivity with the mouse that is applied in the entire game camera movement
+@export var MOUSE_SENSITIVITY = GlobalSettings.MOUSE_SENSITIVITY
+## The camera sensitivity to balance the smoothness of the rotation
+@export_range(0, 1, 0.01) var CAMERA_SENSITIVITY := 0.3
+
+## FREE LOOK FEATURE ##
+@export_group("Free look")
+## Free look feature is active for the controller
+@export var FREE_LOOK_ENABLED := true
+## The smoothness applied when neck is rotated on free look
+@export var FREE_LOOKING_LERP_SPEED := 10.0
+## The tilt on degrees for the neck when free look is active
+@export var FREE_LOOK_TILT := 5.0
+## The initial rotation when free look is active, set to max value to rotate directly the neck to the maximum rotation
+@export var FREE_LOOK_INITIAL_ROTATION := 0
+## The maximum neck rotation when the character is free looking
+@export var FREE_LOOK_MAXIMUM_ROTATION := 120
+
+@export_group("Head bobbing")
+## Enable head bobbing for this First person controller
+@export var BOB_ENABLED := true
+@export var BOB_VECTOR := Vector2.ZERO
+@export var BOB_INDEX := 0.0
+@export var BOB_LERP_SPEED := 10.0
+@export var BOB_SPEED = 7.5
+@export var BOB_INTENSITY = 0.1
+
+@export_group("Swing head")
+## Enable the swing head when move on horizontal axis (right & left)
+@export var SWING_HEAD_ENABLED := false
+## The rotation swing to apply in degrees
+@export var SWING_HEAD_ROTATION := 5
+@export var SWING_HEAD_ROTATION_LERP := 0.05
+@export var SWING_HEAD_RECOVERY_LERP := 0.15
+
+@export_group("Camera FOV")
+@export var camera_fov_range = [2, 75, 85]
+
+
+```
+
+# Accessible normal variables
+```py
+var IS_FREE_LOOKING := false
+var LOCKED := false
+```
+
 
 # Inputs
 This Godot project come with a premade input map, feel free to change it as your needs
@@ -58,17 +110,19 @@ This Godot project come with a premade input map, feel free to change it as your
 <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>
 
 ## Sprint
-<kbd>Shift</kbd> - Run
+<kbd>Shift</kbd> - Keep pressed this key to run, a sprint runtime can be configured to limit the time the player can run.
 
 ## Crouch
 <kbd>Ctrl</kbd> - Crouch
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> - Crawl
 
+## Jump
+<kbd>Space</kbd>
+
 ## Free look
 <kbd>Alt</kbd> Keep pressed this key to look around with your head using your mouse. Useful when you want to look behind but wanting to keep walking ahead.
 
 
-# Exported parameters
 
 
 # You are welcome to
