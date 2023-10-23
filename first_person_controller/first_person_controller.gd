@@ -65,6 +65,7 @@ class_name Player extends CharacterBody3D
 var IS_FREE_LOOKING := false
 var LOCKED := false
 
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	

@@ -18,11 +18,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalSettings="*res://autoload/global_settings.gd"
+GlobalEvents="*res://autoload/global_events.gd"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=720
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/proto_shape/plugin.cfg")
 
 [input]
 
@@ -89,3 +94,4 @@ jump={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="GameObjects"
+3d_physics/layer_4="Stairs"

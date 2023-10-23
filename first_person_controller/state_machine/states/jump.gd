@@ -4,7 +4,7 @@ class_name Jump extends Motion
 @export var jump_velocity := 5.0
 @export var jump_times := 1
 ## The speed when moves horizontally in the air
-@export var air_speed := 2.0
+@export var air_control_speed := 2.0
 ## Will be multiplied by delta
 @export var lerp_smoothness := 3.0
 
@@ -35,8 +35,8 @@ func physics_update(delta):
 		else:
 			state_finished.emit("Idle", {})
 	
-	owner.velocity.x = lerp(owner.velocity.x, direction.x * air_speed, delta * lerp_smoothness)
-	owner.velocity.z = lerp(owner.velocity.z, direction.z * air_speed, delta * lerp_smoothness)
+	owner.velocity.x = lerp(owner.velocity.x, direction.x * air_control_speed, delta * lerp_smoothness)
+	owner.velocity.z = lerp(owner.velocity.z, direction.z * air_control_speed, delta * lerp_smoothness)
 	
 	if Input.is_action_just_pressed("jump") and jump_times > 1 and jump_count < jump_times:
 		owner.velocity.y = jump_velocity
