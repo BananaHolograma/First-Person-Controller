@@ -18,7 +18,7 @@ func physics_update(delta):
 	
 	move(speed, delta)
 	
-	if owner.velocity.is_zero_approx():
+	if direction.is_zero_approx() or owner.velocity.is_zero_approx():
 		state_finished.emit("Idle", {})
 		return
 	

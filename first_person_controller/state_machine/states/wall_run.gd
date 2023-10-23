@@ -22,6 +22,7 @@ func physics_update(delta):
 	
 	if Input.is_action_just_pressed("jump"):
 		state_finished.emit("Jump", {"wall_normal": wall_normal})
+		return
 	
 	owner.move_and_slide()
 	

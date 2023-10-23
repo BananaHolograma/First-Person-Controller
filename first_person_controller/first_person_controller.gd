@@ -51,7 +51,7 @@ class_name Player extends CharacterBody3D
 @export var SWING_HEAD_RECOVERY_LERP := 0.15
 
 @export_group("Camera FOV")
-@export var camera_fov_range = [2, 75, 85, 8.0]
+@export var camera_fov_range = [2, 75.0, 85.0, 8.0]
 
 
 var IS_FREE_LOOKING := false
@@ -73,6 +73,7 @@ func _physics_process(delta):
 	free_look(delta)
 	bobbing(delta)
 	camera_fov(delta)
+	swing_head()
 	adjust_collision_shapes()
 	
 
@@ -92,10 +93,6 @@ func adjust_collision_shapes() -> void:
 			crawl_collision_shape_3d.disabled = true
 
 	
-## Rotate the neck of the CharacterBody3D
-# to achieve a realistic head movement on the first person controller.
-# This function also detects if free looking is active to move only the head
-##
 func rotate_camera_smoothly(event: InputEvent):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var twist_input = event.relative.x / 1000 * MOUSE_SENSITIVITY 
@@ -165,13 +162,32 @@ func bobbing(delta: float = get_physics_process_delta_time()) -> void:
 			eyes.position.move_toward(Vector3.ZERO, delta * BOB_LERP_SPEED)
 
 
+func swing_head() -> void:
+	if SWING_HEAD_ENABLED:
+		var direction := get_input_direction()
+
+		if direction["input_direction"] in [Vector2.RIGHT, Vector2.LEFT]:
+			neck.rotation.z = lerp_angle(neck.rotation.z, -sign(direction["input_direction"].x) * deg_to_rad(SWING_HEAD_ROTATION), SWING_HEAD_ROTATION_LERP)
+		else:
+			neck.rotation.z = lerp_angle(neck.rotation.z, 0.0, SWING_HEAD_RECOVERY_LERP)
+
+
 func camera_fov(delta: float = get_physics_process_delta_time()) -> void:
 	if finite_state_machine.current_state_name_is("Run"):
-		camera_3d.fov = lerp(camera_3d.fov, float(camera_fov_range[2]), delta * camera_fov_range[3])
+		camera_3d.fov = lerp(camera_3d.fov, camera_fov_range[2], delta * camera_fov_range[3])
 	else:
-		camera_3d.fov = lerp(camera_3d.fov, float(camera_fov_range[1]), delta * camera_fov_range[3])
+		camera_3d.fov = lerp(camera_3d.fov, camera_fov_range[1], delta * camera_fov_range[3])
 	
+
+
+func get_input_direction() -> Dictionary:
+	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	return {
+		"input_direction": input_dir,
+		"direction": (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	} 
+
 func _switch_mouse_mode() -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
