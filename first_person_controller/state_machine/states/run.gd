@@ -29,12 +29,11 @@ func physics_update(delta):
 		else:
 			state_finished.emit("Walk", {})
 			
-	if Input.is_action_just_pressed("crouch"):
+	if Input.is_action_just_pressed("crouch") and owner.CAN_SLIDE:
 		state_finished.emit("Slide", {})
 		return
 	
 	detect_jump()
-	detect_crouch()
 	
 	owner.move_and_slide()
 	

@@ -22,7 +22,7 @@ func physics_update(delta):
 		state_finished.emit("Idle", {})
 		return
 	
-	if Input.is_action_pressed("run") and catching_breath_timer.is_stopped():
+	if Input.is_action_pressed("run") and catching_breath_timer.is_stopped() and owner.CAN_RUN:
 		state_finished.emit("Run", {})
 		return
 		

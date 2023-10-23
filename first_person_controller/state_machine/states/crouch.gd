@@ -20,7 +20,7 @@ func physics_update(delta):
 		else:
 			state_finished.emit("Walk", {})
 	
-	if Input.is_action_just_pressed("crawl") and not animation_player.is_playing():
+	if Input.is_action_just_pressed("crawl") and owner.CAN_CRAWL and not animation_player.is_playing():
 		state_finished.emit("Crawl", {})
 		
 	move(speed, delta)

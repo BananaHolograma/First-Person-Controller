@@ -59,7 +59,7 @@ func shorten_jump():
 
 
 func detect_wall():
-	if owner.is_on_wall():
+	if owner.is_on_wall() and owner.CAN_WALL_RUN:
 		var collision = owner.get_slide_collision(0)
 		var normal = collision.get_normal()
 		var wall_direction = Vector3.UP.cross(normal)

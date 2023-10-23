@@ -118,6 +118,9 @@ This Godot project come with a premade input map, feel free to change it as your
 
 if a ceiling collision is detected, it is not necessary to hold down the key to remain in this state.
 
+## Slide
+<kbd>Ctrl</kbd> Press this key when you're running and you will execute a slide that allows you free look on the action. You cannot control the direction while is sliding but you can jump. The speed slows down as it slides
+
 ## Jump
 <kbd>Space</kbd>
 

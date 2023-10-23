@@ -53,6 +53,14 @@ class_name Player extends CharacterBody3D
 @export_group("Camera FOV")
 @export var camera_fov_range = [2, 75.0, 85.0, 8.0]
 
+@export_group("Mechanics")
+@export var CAN_JUMP := false
+@export var CAN_WALL_RUN := false
+## Run needs to be active also to use the slide
+@export var CAN_SLIDE := false
+@export var CAN_RUN := true
+@export var CAN_CROUCH := true
+@export var CAN_CRAWL := true
 
 var IS_FREE_LOOKING := false
 var LOCKED := false
@@ -66,16 +74,20 @@ func _ready():
 
 
 func _input(event: InputEvent):
-	rotate_camera_smoothly(event)
+	if not LOCKED:
+		rotate_camera_smoothly(event)
+		
 	_switch_mouse_mode()
 	
+
 func _physics_process(delta):
-	free_look(delta)
-	bobbing(delta)
-	camera_fov(delta)
-	swing_head()
-	adjust_collision_shapes()
-	
+	if not LOCKED:
+		free_look(delta)
+		bobbing(delta)
+		camera_fov(delta)
+		swing_head()
+		adjust_collision_shapes()
+		
 
 func adjust_collision_shapes() -> void:
 	match(finite_state_machine.current_state.name):
@@ -178,6 +190,14 @@ func camera_fov(delta: float = get_physics_process_delta_time()) -> void:
 	else:
 		camera_3d.fov = lerp(camera_3d.fov, camera_fov_range[1], delta * camera_fov_range[3])
 	
+
+func lock_player(lock : bool) -> void:
+	if lock:
+		LOCKED = true
+		finite_state_machine.lock_state_machine()
+	else:
+		LOCKED = false
+		finite_state_machine.unlock_state_machine()
 
 
 func get_input_direction() -> Dictionary:

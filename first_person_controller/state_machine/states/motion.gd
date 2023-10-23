@@ -31,11 +31,11 @@ func move(speed: float, delta: float = get_physics_process_delta_time()):
 		
 	
 func detect_jump():
-	if Input.is_action_just_pressed("jump") and owner.is_on_floor():
+	if Input.is_action_just_pressed("jump") and owner.is_on_floor() and owner.CAN_JUMP:
 		state_finished.emit("Jump", {})
 
 func detect_crouch():
-	if Input.is_action_pressed("crouch") and owner.is_on_floor():
+	if Input.is_action_pressed("crouch") and owner.is_on_floor() and owner.CAN_CROUCH:
 		state_finished.emit("Crouch", {})
 
 
