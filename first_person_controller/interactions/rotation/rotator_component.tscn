@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h061cafa52a5"]
+
+[ext_resource type="Script" path="res://first_person_controller/interactions/rotation/rotator_component.gd" id="1_0fvof"]
+
+[node name="RotatorComponent" type="Node3D"]
+script = ExtResource("1_0fvof")

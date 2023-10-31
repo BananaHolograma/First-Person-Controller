@@ -117,6 +117,19 @@ unique_name_in_owner = true
 [node name="Camera3D" type="Camera3D" parent="Neck/Head/Eyes"]
 unique_name_in_owner = true
 
+[node name="ScanSpotLight3D" type="SpotLight3D" parent="Neck/Head/Eyes"]
+unique_name_in_owner = true
+light_energy = 2.5
+light_indirect_energy = 2.1
+spot_range = 1.0
+spot_attenuation = 2.0
+spot_angle = 23.0
+spot_angle_attenuation = 0.841
+
+[node name="InteractiveSpot" type="Marker3D" parent="Neck/Head/Eyes"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.837139)
+
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_ulv18")
 current_state = NodePath("Idle")
