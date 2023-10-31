@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b317ev4vnerlq"]
+[gd_scene load_steps=21 format=3 uid="uid://b317ev4vnerlq"]
 
 [ext_resource type="Script" path="res://first_person_controller/first_person_controller.gd" id="1_jjech"]
+[ext_resource type="PackedScene" uid="uid://c7iy7bajh3wil" path="res://first_person_controller/ui/interactions/interaction_pointer.tscn" id="2_72auq"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/finite_state_machine.gd" id="2_ulv18"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/idle.gd" id="3_ebmny"]
+[ext_resource type="PackedScene" uid="uid://dma5qg6j8mij0" path="res://first_person_controller/ui/scan/scan_viewport.tscn" id="3_qg1n4"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/walk.gd" id="4_4qxtv"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/jump.gd" id="5_giftp"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/run.gd" id="5_jx43c"]
@@ -86,6 +88,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895294, 0)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_jjech")
+CAN_JUMP = true
+CAN_SLIDE = true
+
+[node name="InteractionUI" type="CanvasLayer" parent="."]
+
+[node name="InteractionPointer" parent="InteractionUI" instance=ExtResource("2_72auq")]
+
+[node name="ScanUI" type="CanvasLayer" parent="."]
+
+[node name="ScanViewport" parent="ScanUI" node_paths=PackedStringArray("current_camera", "interactive_spot", "scan_light") instance=ExtResource("3_qg1n4")]
+current_camera = NodePath("../../Neck/Head/Eyes/Camera3D")
+interactive_spot = NodePath("../../Neck/Head/Eyes/InteractiveSpot")
+scan_light = NodePath("../../Neck/Head/Eyes/ScanSpotLight3D")
 
 [node name="StandingCollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0669819, 0)

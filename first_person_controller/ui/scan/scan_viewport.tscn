@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://dma5qg6j8mij0"]
+
+[ext_resource type="Script" path="res://first_person_controller/ui/scan/scan_viewport.gd" id="1_1nqht"]
+[ext_resource type="LabelSettings" uid="uid://cupc1q827o5u8" path="res://first_person_controller/ui/theme/scan_viewport_label_settings.tres" id="1_3g2xf"]
+
+[node name="ScanViewport" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1nqht")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="DescriptionContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/DescriptionContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/DescriptionContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = ExtResource("1_3g2xf")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/DescriptionContainer/VBoxContainer"]
+self_modulate = Color(1, 0.878431, 0.376471, 1)
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/DescriptionContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = ExtResource("1_3g2xf")

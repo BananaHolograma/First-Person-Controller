@@ -8,6 +8,7 @@ class_name Player extends CharacterBody3D
 @onready var standing_collision_shape_3d: CollisionShape3D = $StandingCollisionShape3D
 @onready var crouch_collision_shape_3d: CollisionShape3D = $CrouchCollisionShape3D
 @onready var crawl_collision_shape_3d: CollisionShape3D = $CrawlCollisionShape3D
+@onready var scan_spot_light_3d: SpotLight3D = %ScanSpotLight3D
 
 ## MOUSE AND CAMERA SENSITIVITY
 @export_group("Sensitivity")
@@ -75,6 +76,8 @@ func _ready():
 	
 	GlobalEvents.lock_player.connect(lock_player.bind(true))
 	GlobalEvents.unlock_player.connect(lock_player.bind(false))
+	
+	scan_spot_light_3d.hide()
 
 
 func _input(event: InputEvent):
