@@ -72,6 +72,9 @@ func _ready():
 	standing_collision_shape_3d.disabled = false
 	crouch_collision_shape_3d.disabled = true
 	crawl_collision_shape_3d.disabled = true
+	
+	GlobalEvents.lock_player.connect(lock_player.bind(true))
+	GlobalEvents.unlock_player.connect(lock_player.bind(false))
 
 
 func _input(event: InputEvent):

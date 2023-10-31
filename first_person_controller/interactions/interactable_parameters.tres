@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InteractableParameters" load_steps=2 format=3 uid="uid://c65bjap26pl2d"]
+
+[ext_resource type="Script" path="res://first_person_controller/interactions/interactable_parameters.gd" id="1_8bacn"]
+
+[resource]
+script = ExtResource("1_8bacn")
+title = ""
+description = ""
+category = 0
+scannable = false
+pickable = false
+pickup_message = ""
+lock_player = false
