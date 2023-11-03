@@ -3,8 +3,9 @@ extends Node3D
 signal picked(picked_object: Interactable)
 signal dropped(picked_object: Interactable)
 signal throwed(picked_object: Interactable)
+signal picked_heavy_lift(picked_object: Interactable, mass_limit: float)
 
-@export var maximum_lift_mass = 10
+@export var maximum_lift_mass := 10.0
 
 @onready var hand: Generic6DOFJoint3D = $Hand
 @onready var hand_limit: StaticBody3D = $HandLimit
@@ -64,5 +65,8 @@ func throw():
 		
 func on_interact(interactable: Interactable):
 	if interactable.is_pickable():
-		pick(interactable)
+		if interactable.target.mass <= maximum_lift_mass:
+			pick(interactable)
+		else:
+			picked_heavy_lift.emit(interactable, maximum_lift_mass)
 		
