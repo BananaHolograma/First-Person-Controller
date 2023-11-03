@@ -20,6 +20,7 @@ enum CATEGORY {
 @export_group("Pickup")
 @export var pickable := false
 @export var pickup_message: String
+@export var pull_power := 20.0
 @export var throw_power := 10.0
 
 @export_group("Player")

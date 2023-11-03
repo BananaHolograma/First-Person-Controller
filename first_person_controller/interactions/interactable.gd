@@ -17,6 +17,7 @@ var actor: Interactor
 func _ready():
 	collision_layer = 32
 	collision_mask = 0
+	priority = 3
 	monitoring = false
 	monitorable = true
 	

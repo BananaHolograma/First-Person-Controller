@@ -128,6 +128,7 @@ func rotate_camera_smoothly(event: InputEvent):
 			rotation.y =  lerp_angle(rotation.y, target_rotation_y, CAMERA_SENSITIVITY)
 			
 		neck.rotation.x = lerp_angle(neck.rotation.x, target_rotation_x, CAMERA_SENSITIVITY)
+		$Hands.rotation.x = neck.rotation.x
 
 
 func free_look(delta: float = get_physics_process_delta_time()):

@@ -159,11 +159,13 @@ actor = NodePath("../../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447577, 0)
 script = ExtResource("5_h88yb")
 
-[node name="Hand" type="SliderJoint3D" parent="Hands"]
+[node name="Hand" type="Generic6DOFJoint3D" parent="Hands"]
 node_a = NodePath("../HandLimit")
 
 [node name="HandLimit" type="StaticBody3D" parent="Hands"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.06721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hands/HandLimit"]
 shape = SubResource("SphereShape3D_yu137")

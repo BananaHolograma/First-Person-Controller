@@ -7,7 +7,7 @@ class_name Motion extends State
 @onready var ceil_
 @export var gravity: float =  ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var friction: float = 7.0
-@export var fall_velocity_limit: float = 200.0
+@export var fall_velocity_limit: float = 300.0
 
 var direction := Vector3.ZERO
 
@@ -16,7 +16,7 @@ func physics_update(delta: float):
 	
 	if not owner.is_on_floor() and not finite_state_machine.current_state_name_is("WallRun"):
 		owner.velocity.y -= gravity * delta
-		owner.velocity.y = clamp(owner.velocity.y, -fall_velocity_limit, fall_velocity_limit)
+#		owner.velocity.y = clamp(owner.velocity.y, -fall_velocity_limit, fall_velocity_limit)
 		
 
 

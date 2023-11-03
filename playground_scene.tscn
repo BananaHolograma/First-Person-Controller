@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://5qk661u67pbp"]
+[gd_scene load_steps=19 format=3 uid="uid://5qk661u67pbp"]
 
 [ext_resource type="Texture2D" uid="uid://36c0llyr3w8h" path="res://assets/prototyping/Dark/texture_01.png" id="1_huq0g"]
 [ext_resource type="Texture2D" uid="uid://cpxjbxcj57k16" path="res://assets/prototyping/Purple/texture_03.png" id="2_8vqjc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://077ox8jkck2" path="res://assets/prototyping/Purple/texture_04.png" id="3_v1gxn"]
 [ext_resource type="Script" path="res://first_person_controller/interactions/interactable.gd" id="5_np0k5"]
 [ext_resource type="Script" path="res://first_person_controller/interactions/interactable_parameters.gd" id="6_t56v5"]
+[ext_resource type="Texture2D" uid="uid://tbav28qojufo" path="res://first_person_controller/ui/crosshairs/hand1.png" id="7_k6x8i"]
 [ext_resource type="Texture2D" uid="uid://lmdad2aifb62" path="res://first_person_controller/ui/crosshairs/open_pointer.png" id="7_o1cc5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jx3dq"]
@@ -20,9 +21,8 @@ uv1_triplanar = true
 albedo_texture = ExtResource("3_v1gxn")
 uv1_triplanar = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_746wr"]
-resource_local_to_scene = true
-size = Vector3(0.52, 0.5, 0.5)
+[sub_resource type="BoxMesh" id="BoxMesh_ck6q6"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cg7nb"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -35,10 +35,12 @@ category = 2
 scannable = false
 pickable = true
 pickup_message = "pick!"
+pull_power = 20.0
 throw_power = 10.0
 lock_player = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_26021"]
+radius = 0.7
 
 [sub_resource type="BoxMesh" id="BoxMesh_xnn0g"]
 size = Vector3(0.2, 0.2, 0.3)
@@ -51,6 +53,7 @@ category = 2
 scannable = true
 pickable = false
 pickup_message = "PICKUP!"
+pull_power = 20.0
 throw_power = 10.0
 lock_player = true
 
@@ -86,21 +89,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49179, 1.97496, 4.4323)
 use_collision = true
 size = Vector3(8.86805, 3.87477, 0.746879)
 
-[node name="PickableObject" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6924, 0.471102, 0.493732)
-mesh = SubResource("BoxMesh_746wr")
-skeleton = NodePath("RigidBody3D")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="PickableObject"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80616, -0.467659, 0)
+[node name="PickableObject" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75088, 0.465653, 0)
 collision_layer = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickableObject/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PickableObject"]
+mesh = SubResource("BoxMesh_ck6q6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickableObject"]
 shape = SubResource("BoxShape3D_cg7nb")
 
 [node name="Interactable" type="Area3D" parent="PickableObject"]
 script = ExtResource("5_np0k5")
 parameters = SubResource("Resource_yjpjr")
+focus_pointer = ExtResource("7_k6x8i")
+interact_pointer = ExtResource("7_k6x8i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickableObject/Interactable"]
 shape = SubResource("SphereShape3D_26021")
