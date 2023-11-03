@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b317ev4vnerlq"]
+[gd_scene load_steps=24 format=3 uid="uid://b317ev4vnerlq"]
 
 [ext_resource type="Script" path="res://first_person_controller/first_person_controller.gd" id="1_jjech"]
 [ext_resource type="PackedScene" uid="uid://c7iy7bajh3wil" path="res://first_person_controller/ui/interactions/interaction_pointer.tscn" id="2_72auq"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/idle.gd" id="3_ebmny"]
 [ext_resource type="PackedScene" uid="uid://dma5qg6j8mij0" path="res://first_person_controller/ui/scan/scan_viewport.tscn" id="3_qg1n4"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/walk.gd" id="4_4qxtv"]
+[ext_resource type="Script" path="res://first_person_controller/interactions/interactor.gd" id="4_er5sy"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/jump.gd" id="5_giftp"]
+[ext_resource type="Script" path="res://first_person_controller/hands.gd" id="5_h88yb"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/run.gd" id="5_jx43c"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crouch.gd" id="7_skljo"]
 [ext_resource type="Script" path="res://first_person_controller/state_machine/states/crawl.gd" id="8_mxk70"]
@@ -28,6 +30,9 @@ height = 0.748248
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rm6ri"]
 radius = 0.3
 height = 1.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yu137"]
+radius = 0.1
 
 [sub_resource type="Animation" id="Animation_387f7"]
 length = 0.001
@@ -144,6 +149,24 @@ spot_angle_attenuation = 0.841
 [node name="InteractiveSpot" type="Marker3D" parent="Neck/Head/Eyes"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.837139)
+
+[node name="Interactor" type="RayCast3D" parent="Neck/Head/Eyes" node_paths=PackedStringArray("actor")]
+target_position = Vector3(0, 0, -1.5)
+script = ExtResource("4_er5sy")
+actor = NodePath("../../../..")
+
+[node name="Hands" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447577, 0)
+script = ExtResource("5_h88yb")
+
+[node name="Hand" type="SliderJoint3D" parent="Hands"]
+node_a = NodePath("../HandLimit")
+
+[node name="HandLimit" type="StaticBody3D" parent="Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.06721)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hands/HandLimit"]
+shape = SubResource("SphereShape3D_yu137")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_ulv18")

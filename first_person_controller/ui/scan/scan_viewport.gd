@@ -18,7 +18,7 @@ extends Control
 var rotator_component_scene: PackedScene = preload("res://first_person_controller/interactions/rotation/rotator_component.tscn")
 
 var current_interactable: Interactable
-var original_camera_fov := 0
+var original_camera_fov := 0.0
 
 var scanning := false
 var interactable_original_position := Vector3.ZERO
@@ -46,7 +46,7 @@ func _ready():
 
 func _physics_process(delta: float):
 	if scanning and current_interactable and current_camera:
-		if Input.is_action_pressed("zoom"):
+		if InputMap.has_action("zoom") and Input.is_action_pressed("zoom"):
 			current_camera.fov = lerp(current_camera.fov, max_zoom, delta * 5.0)
 		else:
 			current_camera.fov = lerp(current_camera.fov, initial_zoom, delta * 5.0)
@@ -58,14 +58,15 @@ func _position_interactable_on_screen(interactable: Interactable):
 	if interactive_spot:
 		interactable.target.rotation = interactive_spot.rotation
 		var tween = create_tween()
-		tween.tween_property(interactable.target, "global_position", interactive_spot.global_position, 0.4).from(interactable.target.global_position).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tween.tween_property(interactable.target, "global_position", interactive_spot.global_position, 0.4).from(interactable.target.global_position)\
+			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 	if current_camera:
 		var tween = create_tween()
 		tween.tween_property(current_camera, "fov", initial_zoom, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 
 
-func stop_scan(interactable: Interactable) -> void:
+func stop_scan(_interactable: Interactable) -> void:
 	set_process_unhandled_input(false)
 	scanning = false
 	

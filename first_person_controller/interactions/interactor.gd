@@ -16,7 +16,9 @@ func _enter_tree():
 
 
 func _unhandled_input(_event: InputEvent):
-	if Input.is_action_just_pressed("interact") and current_interactable and not interacting:
+	if InputMap.has_action("interact")\
+	 and Input.is_action_just_pressed("interact")\
+	 and current_interactable and not interacting:
 		interact(current_interactable)
 	
 
