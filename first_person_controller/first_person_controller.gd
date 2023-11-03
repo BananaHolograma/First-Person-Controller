@@ -3,6 +3,8 @@ class_name Player extends CharacterBody3D
 @onready var neck: Node3D = %Neck
 @onready var head: Node3D = %Head
 @onready var eyes: Node3D = %Eyes
+@onready var hands: Node3D = %Hands
+
 @onready var camera_3d: Camera3D = $Neck/Head/Eyes/Camera3D
 @onready var finite_state_machine = $FiniteStateMachine as FiniteStateMachine
 @onready var standing_collision_shape_3d: CollisionShape3D = $StandingCollisionShape3D
@@ -128,7 +130,7 @@ func rotate_camera_smoothly(event: InputEvent):
 			rotation.y =  lerp_angle(rotation.y, target_rotation_y, CAMERA_SENSITIVITY)
 			
 		neck.rotation.x = lerp_angle(neck.rotation.x, target_rotation_x, CAMERA_SENSITIVITY)
-		$Hands.rotation.x = neck.rotation.x
+		hands.rotation.x = neck.rotation.x
 
 
 func free_look(delta: float = get_physics_process_delta_time()):

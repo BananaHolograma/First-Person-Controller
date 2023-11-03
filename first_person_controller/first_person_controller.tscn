@@ -156,6 +156,7 @@ script = ExtResource("4_er5sy")
 actor = NodePath("../../../..")
 
 [node name="Hands" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447577, 0)
 script = ExtResource("5_h88yb")
 

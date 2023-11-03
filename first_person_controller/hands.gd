@@ -40,6 +40,7 @@ func pick(interactable: Interactable):
 	
 	tween.tween_callback(func():
 		set_process_unhandled_input(true)
+		set_physics_process(true)
 		hand.node_b = picked_object.target.get_path()
 		picked.emit(picked_object)
 	)
@@ -47,6 +48,7 @@ func pick(interactable: Interactable):
 	
 func drop():
 	set_process_unhandled_input(false)
+	set_physics_process(false)
 	
 	if picked_object:
 		picked_object.actor.cancel_interact(picked_object)
