@@ -12,7 +12,7 @@ config_version=5
 
 config/name="First Person Controller"
 run/main_scene="res://playground_scene.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,8 +22,15 @@ GlobalEvents="*res://autoload/global_events.gd"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+
+[dotnet]
+
+project/assembly_name="First Person Controller"
 
 [editor_plugins]
 
