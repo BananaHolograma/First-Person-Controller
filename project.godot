@@ -22,8 +22,8 @@ GlobalEvents="*res://autoload/global_events.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
@@ -123,3 +123,4 @@ throw={
 3d_physics/layer_3="GameObjects"
 3d_physics/layer_4="Stairs"
 3d_physics/layer_5="Pickable"
+3d_physics/layer_6="Hitboxes"
