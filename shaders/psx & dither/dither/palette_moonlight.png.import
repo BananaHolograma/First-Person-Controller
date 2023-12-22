@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d743e6j5a14r"
-path="res://.godot/imported/dither_matrix.png-b301f59b00c8cb7057f04a2398948f89.ctex"
+uid="uid://bm4nlba6tptfv"
+path="res://.godot/imported/palette_moonlight.png-50ef3370787a462e93117a33d140c4d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/dither_matrix.png"
-dest_files=["res://.godot/imported/dither_matrix.png-b301f59b00c8cb7057f04a2398948f89.ctex"]
+source_file="res://shaders/psx & dither/dither/palette_moonlight.png"
+dest_files=["res://.godot/imported/palette_moonlight.png-50ef3370787a462e93117a33d140c4d3.ctex"]
 
 [params]
 

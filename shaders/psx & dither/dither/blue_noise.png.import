@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccddu2apfhhnc"
-path="res://.godot/imported/bayer4tile8.png-61f2388b91595a83d0ae03b7301c8544.ctex"
+uid="uid://cexuittsualu6"
+path="res://.godot/imported/blue_noise.png-0e22e897bbb4a424a39773e08c6a909a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/bayer4tile8.png"
-dest_files=["res://.godot/imported/bayer4tile8.png-61f2388b91595a83d0ae03b7301c8544.ctex"]
+source_file="res://shaders/psx & dither/dither/blue_noise.png"
+dest_files=["res://.godot/imported/blue_noise.png-0e22e897bbb4a424a39773e08c6a909a.ctex"]
 
 [params]
 

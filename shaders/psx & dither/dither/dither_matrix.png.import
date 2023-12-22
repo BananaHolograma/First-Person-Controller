@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d23brgiwgcksf"
-path="res://.godot/imported/palette_hollow.png-8614b49be3bd3acc1b70d53fd7233cd3.ctex"
+uid="uid://d743e6j5a14r"
+path="res://.godot/imported/dither_matrix.png-3f71440a0b9d1ac396ac1aeee9a9a8e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/palette_hollow.png"
-dest_files=["res://.godot/imported/palette_hollow.png-8614b49be3bd3acc1b70d53fd7233cd3.ctex"]
+source_file="res://shaders/psx & dither/dither/dither_matrix.png"
+dest_files=["res://.godot/imported/dither_matrix.png-3f71440a0b9d1ac396ac1aeee9a9a8e0.ctex"]
 
 [params]
 

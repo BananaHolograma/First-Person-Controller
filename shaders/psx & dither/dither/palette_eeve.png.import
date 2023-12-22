@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3gv3oh50uscy"
-path="res://.godot/imported/palette_eeve.png-6e3bb2ce5499b2e6bc51daf718ab71fe.ctex"
+path="res://.godot/imported/palette_eeve.png-4b51a3ebd528525417a07fb07776a518.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/palette_eeve.png"
-dest_files=["res://.godot/imported/palette_eeve.png-6e3bb2ce5499b2e6bc51daf718ab71fe.ctex"]
+source_file="res://shaders/psx & dither/dither/palette_eeve.png"
+dest_files=["res://.godot/imported/palette_eeve.png-4b51a3ebd528525417a07fb07776a518.ctex"]
 
 [params]
 

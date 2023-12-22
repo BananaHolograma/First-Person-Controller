@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5fbej0xfosu5"
-path="res://.godot/imported/bayer8tile4.png-14423c8e65c391c4ba797cc51f0d4d8e.ctex"
+uid="uid://d23brgiwgcksf"
+path="res://.godot/imported/palette_hollow.png-a480ce56694a92eb631323618e00acf0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/bayer8tile4.png"
-dest_files=["res://.godot/imported/bayer8tile4.png-14423c8e65c391c4ba797cc51f0d4d8e.ctex"]
+source_file="res://shaders/psx & dither/dither/palette_hollow.png"
+dest_files=["res://.godot/imported/palette_hollow.png-a480ce56694a92eb631323618e00acf0.ctex"]
 
 [params]
 

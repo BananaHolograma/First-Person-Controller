@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drjgnsxqr4y4y"
-path="res://.godot/imported/palette_mono.png-a4dc1a2741d378c083ffe826eca68fbc.ctex"
+uid="uid://f2762a1fmdko"
+path="res://.godot/imported/palette_rising_sun.png-89024b909cd3c19db266071f376aac31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/dither/palette_mono.png"
-dest_files=["res://.godot/imported/palette_mono.png-a4dc1a2741d378c083ffe826eca68fbc.ctex"]
+source_file="res://shaders/psx & dither/dither/palette_rising_sun.png"
+dest_files=["res://.godot/imported/palette_rising_sun.png-89024b909cd3c19db266071f376aac31.ctex"]
 
 [params]
 
